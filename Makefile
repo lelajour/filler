@@ -6,7 +6,7 @@
 #    By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 20:37:24 by lelajour          #+#    #+#              #
-#    Updated: 2019/06/25 18:20:22 by lelajour         ###   ########.fr        #
+#    Updated: 2019/07/04 03:43:11 by lelajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,19 +18,23 @@ CFLAGS = -Werror -Wextra -Wall -g
 
 NAME = lelajour.filler
 
-LIB.A = cd libft
-
-PRINTF.A = cd libft/libftprintf
-
 D_SRC = src/
 
-D_LIBFT = $(LIB.A) $(PRINTF.A)
+D_LIBFT = libft/
+
+D_LIBFTPRINTF = libft/libftprintf/
 
 SRC1 =		ft_parsing.c\
 
-SRC2=			libft/libft.a libft/libftprintf/libftprintf.a\
+SRC2 =		libft.a\
+
+SRC3 =		libftprintf.a\
 
 SRC_FILL = $(addprefix $(D_SRC), $(SRC1))
+
+SRC_LIB.A = $(addprefix $(D_LIBFT), $(SRC2))
+
+SRC_PRINTF.A = $(addprefix $(D_LIBFTPRINTF), $(SRC3))
 
 OBJ = $(SRC_FILL:.c=.o)
 
@@ -39,9 +43,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C libft
 	@make -C libft/libftprintf
-	@cp libft/libft.a ./$(NAME)
-	@cp libft/libftprintf/libftprintf.a ./$(NAME)
-	@$(CC) $(NAME) $(OBJ) libft/libft.a libft/libftprintf/libftprintf.a
+	@$(CC) -g -o $(NAME) $(OBJ) $(SRC_LIB.A) $(SRC_PRINTF.A)
 	@echo "\033[0;32m✅️    $(NAME) executable created."
 
 ./%.o: ./%.c

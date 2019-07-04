@@ -6,7 +6,7 @@
 #    By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 16:35:57 by lelajour          #+#    #+#              #
-#    Updated: 2019/06/25 17:38:10 by lelajour         ###   ########.fr        #
+#    Updated: 2019/07/03 22:05:34 by lelajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS= ft_atoi.c ft_memcpy.c ft_strrev.c ft_strlcat.c ft_lstnew.c ft_lstdelone.c\
 	ft_striteri.c ft_strrch.c ft_memcmp.c ft_putstr_fd.c ft_strjoin.c\
 	ft_lstadd.c ft_strrchr.c ft_lstiter.c ft_lstmap.c ft_fail.c ft_strndup.c\
 	ft_strlentab.c ft_swap.c ft_colchr.c ft_swap_line.c ft_swap_col.c\
+	get_next_line.c\
 
 OBJ= $(SRCS:.c=.o)
 
