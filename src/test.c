@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strrch.c                                      .::    .:/ .      .::   */
+/*   test.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/13 17:55:55 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/07 17:16:12 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/07/08 21:57:08 by lelajour     #+#   ##    ##    #+#       */
+/*   Updated: 2019/07/08 22:08:28 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../header/ft_filler.h"
 
-char	*ft_strchr(const char *s, int c)
+int		main(int ac, char **av)
 {
-	int	a;
+	int	fd;
+	char	*str;
 
-	a = 0;
-	while (a != 0)
+	fd = open(av[1], O_RDONLY);
+	while (get_next_line(fd, &str) != 0)
 	{
-		if (s[a] == c)
-			return ((char*)&s[a]);
-		a++;
+		ft_printf("%s\n", str);
+		free(str);
 	}
+	// free(str);
 	return (0);
 }

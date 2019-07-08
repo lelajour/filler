@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strrch.c                                      .::    .:/ .      .::   */
+/*   ft_strclen.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/13 17:55:55 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/07 17:16:12 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/07/07 13:49:39 by lelajour     #+#   ##    ##    #+#       */
+/*   Updated: 2019/07/07 13:51:35 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strchr(const char *s, int c)
+int		ft_strclen(char	*str, char c)
 {
-	int	a;
+	int i;
 
-	a = 0;
-	while (a != 0)
-	{
-		if (s[a] == c)
-			return ((char*)&s[a]);
-		a++;
-	}
-	return (0);
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/04 20:40:03 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 18:30:35 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/07 17:17:49 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,7 +77,7 @@ char				*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char				*ft_strmap(const char *s, char (*f)(char));
 void				ft_strdel(char **as);
 char				*ft_strcpy(char *dest, const char *src);
-char				*ft_strchr(const char *s, int c);
+char				*ft_strrchr(const char *s, int c);
 void				ft_strclr(char *s);
 void				*ft_memmove(void *dest, const void *src, size_t n);
 int					ft_isdigit(int c);
@@ -110,5 +110,6 @@ char				*ft_itoa_unsigned(unsigned long long n);
 char				*itoa_basic(unsigned long long value, int base, int x);
 char				*f_toa(long double nb, int preci);
 int					get_next_line(const int fd, char **line);
+int					ft_strclen(char	*str, char c);
 
 #endif

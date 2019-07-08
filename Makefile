@@ -6,7 +6,7 @@
 #    By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 20:37:24 by lelajour          #+#    #+#              #
-#    Updated: 2019/07/04 03:43:11 by lelajour         ###   ########.fr        #
+#    Updated: 2019/07/08 21:23:22 by lelajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -g
+CFLAGS = -Werror -Wextra -Wall -g3
 
 NAME = lelajour.filler
 
@@ -24,7 +24,7 @@ D_LIBFT = libft/
 
 D_LIBFTPRINTF = libft/libftprintf/
 
-SRC1 =		ft_parsing.c\
+SRC1 =		ft_parsing.c ft_fill_tab.c ft_clear_memory.c\
 
 SRC2 =		libft.a\
 

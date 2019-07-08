@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/19 15:34:42 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/04 04:17:03 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/08 21:28:30 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,26 +58,26 @@ char		*save_buff(char *buff, char *tmp)
 
 int			get_next_line(const int fd, char **line)
 {
-	static char			*tmp[FD_MAX];
+	static char			*tmp[1];
 	char				buff[BUFF_SIZE + 1];
 	int					i;
 
 	if (!line || fd < 0 || BUFF_SIZE < 0 || fd > 30000)
 		return (-1);
-	if (!tmp[fd])
-		tmp[fd] = ft_strnew(1);
-	while (!ft_strchr(tmp[fd], '\n'))
+	if (!tmp[0])
+		tmp[0] = ft_strnew(1);
+	while (!ft_strchr(tmp[0], '\n'))
 	{
 		if ((i = read(fd, buff, BUFF_SIZE)) < 0)
 			return (-1);
 		buff[i] = '\0';
-		tmp[fd] = save_buff(buff, tmp[fd]);
-		if (i == 0 && ft_strlen(tmp[fd]) == 0)
+		tmp[0] = save_buff(buff, tmp[0]);
+		if (i == 0 && ft_strlen(tmp[0]) == 0)
 			return (0);
 		if (i == 0)
 			break ;
 	}
-	line_return(tmp[fd], line);
-	tmp[fd] = new_tmp(tmp[fd]);
+	line_return(tmp[0], line);
+	tmp[0] = new_tmp(tmp[0]);
 	return (1);
 }

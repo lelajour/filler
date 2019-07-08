@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/13 17:53:49 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/29 12:33:08 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/08 21:26:02 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,18 +20,21 @@ char	*ft_strdup(char *str)
 
 	a = 0;
 	tab = NULL;
-	while (str[a])
-		a++;
-	if (!(tab = (char*)malloc(sizeof(char) * (a) + 1)))
-		return (NULL);
-	if (tab == NULL)
-		return (NULL);
-	a = 0;
-	while (str[a])
+	if (str)
 	{
-		tab[a] = str[a];
-		a++;
+		while (str[a])
+			a++;
+		if (!(tab = (char*)malloc(sizeof(char) * (a) + 1)))
+			return (NULL);
+		if (tab == NULL)
+			return (NULL);
+		a = 0;
+		while (str[a])
+		{
+			tab[a] = str[a];
+			a++;
+		}
+		tab[a] = '\0';
 	}
-	tab[a] = '\0';
 	return (tab);
 }
