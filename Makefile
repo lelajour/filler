@@ -6,7 +6,7 @@
 #    By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 20:37:24 by lelajour          #+#    #+#              #
-#    Updated: 2019/07/08 21:23:22 by lelajour         ###   ########.fr        #
+#    Updated: 2019/07/26 08:41:59 by lelajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ D_LIBFT = libft/
 
 D_LIBFTPRINTF = libft/libftprintf/
 
-SRC1 =		ft_parsing.c ft_fill_tab.c ft_clear_memory.c\
+SRC1 =		ft_parsing_f.c ft_fill_tab.c ft_clear_memory.c ft_fill_piece.c\
+					heat_map.c heat_map_digonal.c heat_map_adjust.c\
 
 SRC2 =		libft.a\
 
@@ -38,6 +39,10 @@ SRC_PRINTF.A = $(addprefix $(D_LIBFTPRINTF), $(SRC3))
 
 OBJ = $(SRC_FILL:.c=.o)
 
+P1 = ./$(NAME)
+
+P2 = ./resources/players/carli.filler
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -46,7 +51,7 @@ $(NAME): $(OBJ)
 	@$(CC) -g -o $(NAME) $(OBJ) $(SRC_LIB.A) $(SRC_PRINTF.A)
 	@echo "\033[0;32m✅️    $(NAME) executable created."
 
-./%.o: ./%.c
+./%.o: ./%.c header/ft_filler.h
 	@$(CC) $(CFLAGS) -o $@ -c $<
 	@echo "\033[0;32m✅️    $@ created."
 
@@ -61,5 +66,23 @@ fclean: clean
 	@rm -f libft/libftprintf/libftprintf.a
 	@rm -f $(NAME)
 	@echo "\033[0;31m🗑️    Deleting $(NAME) executable."
+
+test1: all
+	@rm -rf log.txt
+	@touch log.txt
+	@./resources/filler_vm -f ./resources/maps/map00 -p1 $(P1) -p2 $(P2)\
+		| ./resources/filler_viz
+
+test2: all
+	@rm -rf log.txt
+	@touch log.txt
+	@./resources/filler_vm -f ./resources/maps/map01 -p1 $(P1) -p2 $(P2)\
+		| ./resources/filler_viz
+
+test3: all
+	@rm -rf log.txt
+	@touch log.txt
+	@./resources/filler_vm -f ./resources/maps/map02 -p1 $(P1) -p2 $(P2)\
+		| ./resources/filler_viz
 
 re: fclean all

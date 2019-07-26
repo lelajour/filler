@@ -6,22 +6,12 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/08 18:39:49 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/08 19:16:50 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/13 11:55:06 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../header/ft_filler.h"
-
-void	ft_clear_tab(char **tab, int i)
-{
-	int	x;
-
-	x = 0;
-	while (x < i)
-		free(tab[x++]);
-	free(tab);
-}
 
 void	clear_t_tab(t_tab *tab)
 {
@@ -30,12 +20,15 @@ void	clear_t_tab(t_tab *tab)
 	i = 0;
 	if (tab)
 	{
-		if (tab->tab[0] != NULL)
-		{
-			while (i < tab->width)
-				free(tab->tab[i++]);
-			free(tab->tab);
-		}
+		if (tab->tab != NULL)
+			ft_clear_tab(tab->tab, tab->width);
+		if (tab->pos_en != NULL)
+			ft_clear_int_tab(tab->pos_en, tab->width_en);
+		if (tab->my_pos != NULL)
+			ft_clear_int_tab(tab->my_pos, tab->width_my);
+		if (tab->map !=  NULL)
+			ft_clear_int_tab(tab->map, tab->width);
+		tab->best_pos = NULL;
 		free(tab);
 	}
 }
@@ -47,12 +40,10 @@ void	clear_piece(t_piece *piece)
 	i = 0;
 	if (piece)
 	{
-		if (piece->tab[0] != NULL)
-		{
-			while (i < piece->width)
-				free(piece->tab[i++]);
-			free(piece->tab);
-		}
+		if (piece->tab != NULL)
+			ft_clear_tab(piece->tab, piece->width);
+		if (piece->pos_piece != NULL)
+			ft_clear_int_tab(piece->pos_piece, piece->width_pos);
 		free(piece);
 	}
 }

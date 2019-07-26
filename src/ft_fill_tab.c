@@ -6,93 +6,108 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/06 19:27:04 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/08 20:07:00 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/26 00:29:37 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../header/ft_filler.h"
 
-char	**ft_adjust_rest(char **tab, int width, t_piece *piece)
+int	*get_pos_tab(char *str, int i, char c)
+{
+	int *tmp;
+
+	tmp = NULL;
+	tmp = ft_memalloc(3);
+	tmp[0] = i;
+	tmp[1] = ft_strnclen(str, c) - 1;
+	tmp[2] = ft_strrnclen(str, c) + 1;
+	ft_printf("j esius la = [%d]|[%d][%d]\nME STR [%s]\n", tmp[0], tmp[1], tmp[2], str);
+	return (tmp);
+}
+
+void	get_my_pos(t_tab *tab, int i, char c)
+{
+	int		width;
+	int		tmp;
+
+	ft_printf("je suis my pos = %c\n", c);
+	width = 0;
+	tmp = i;
+	while (i < tab->width)
+	{
+		if (ft_strrchr(tab->tab[i], c) || ft_strrchr(tab->tab[i], c + 32))
+			width++;
+		i++;
+	}
+	// ft_printf("alaid %d\n", width);
+	tab->width_my = width;
+	tab->my_pos = (int**)malloc(sizeof(int*) * width);
+	width = 0;
+	while (tmp < tab->width)
+	{
+		if (ft_strrchr(tab->tab[tmp], c) || ft_strrchr(tab->tab[tmp], c + 32))
+			tab->my_pos[width++] = get_pos_tab(tab->tab[tmp], tmp, c);
+		tmp++;
+	}
+}
+
+void	get_pos_en(t_tab *tab, int i, char c)
+{
+	int		width;
+	int		tmp;
+
+	// ft_printf("je suis pos ennemie = %c\n", c);
+	width = 0;
+	tmp = i;
+	while (i < tab->width)
+	{
+		if (ft_strrchr(tab->tab[i], c) || ft_strrchr(tab->tab[i], c - 32))
+			width++;
+		i++;
+	}
+	// ft_printf("alaid %d\n", width);
+	tab->pos_en = (int**)malloc(sizeof(int*) * width);
+	tab->width_en = width;
+	width = 0;
+	while (tmp < tab->width)
+	{
+		if (ft_strrchr(tab->tab[tmp], c) || ft_strrchr(tab->tab[tmp], c - 32))
+		{
+			tab->pos_en[width] = get_pos_tab(tab->tab[tmp], tmp, c);
+			// ft_printf("me->|%d|%d|%d|\n", tab->pos_en[width][0], tab->pos_en[width][1], tab->pos_en[width][2]);
+			width++;
+		}
+		tmp++;
+	}
+}
+
+void	get_pos_XO(t_tab *tab)
 {
 	int		i;
-	int		len;
-	char	*tmp;
+	char	c;
 
 	i = 0;
-	len = 2147483647;
-	while (i < width)
+	tab->pos_en = NULL;
+	tab->my_pos = NULL;
+	tab->map = NULL;
+	tab->best_pos = NULL;
+	c = tab->c == 'O' ? 'x' : 'o';
+	ft_printf("[%c]\n", tab->c);
+	while (i < tab->width)
 	{
-		if ((tmp = ft_strrchr(tab[i], '*')))
+		if (ft_strchr(tab->tab[i], tab->c) || ft_strchr(tab->tab[i], tab->c + 32))
 		{
-			tmp++;
-			len = ft_strlen(tmp) < len ? ft_strlen(tmp) : len;
+			if (tab->my_pos == NULL)
+				get_my_pos(tab, i, tab->c);
+		}
+		if (ft_strchr(tab->tab[i], c) || ft_strchr(tab->tab[i], c - 32))
+		{
+			if (tab->pos_en == NULL)
+				get_pos_en(tab, i, c);
 		}
 		i++;
 	}
-	i = -1;
-	while (++i < piece->width)
-		ft_memset(tab[i] + (ft_strlen(tab[i]) - len), '\0', len);
-	piece->lenght = ft_strlen(tab[0]);
-	return (tab);
-}
-
-char	**ft_real_psize(char **f_tab, int p_i, t_piece *piece)
-{
-	int		i;
-	int		len;
-	int		width;
-	char	**tab;
-
-	len = 2147483647;
-	i = -1;
-	width = 0;
-	while (++i < p_i && i >= 0)
-	{
-		if ((ft_strclen(f_tab[i], '*')) < len)
-			len = ft_strclen(f_tab[i], '*');
-		if (ft_strrchr(f_tab[i], '*') != 0)
-			width++;
-	}
-	piece->width = width;
-	width = 0;
-	i = -1;
-	tab = malloc(sizeof(char*) * piece->width);
-	while (width < piece->width)
-	{
-		if (ft_strrchr(f_tab[++i], '*') != 0)
-			tab[width++] = ft_strdup(f_tab[i] + len);
-	}
-	return (ft_adjust_rest(tab, piece->width, piece));
-}
-
-t_piece *ft_piece_size()
-{
-	int			i;
-	char		*str;
-	char		**tmp;
-	t_piece	*piece;
-
-	i = 0;
-	tmp = NULL;
-	piece = (t_piece*)malloc(sizeof(t_piece) * 1);
-	if (get_next_line(0, &str) != 0)
-	{
-		piece->width = ft_atoi(&str[6]);
-		piece->lenght = ft_atoi(&str[8]);
-		free(str);
-		tmp = (char**)malloc(sizeof(char*) * piece->width);
-		while (i < piece->width && get_next_line(0, &str))
-		{
-			ft_printf("piece->width ==%#x\n", &*str);
-			tmp[i] = ft_strdup(str);
-			i++;
-			free(str);
-		}
-	}
-	piece->tab = ft_real_psize(tmp, i, piece);
-	ft_clear_tab(tmp, i);
-	return (piece);
 }
 
 int		ft_tab_size(t_tab *tab)
@@ -101,6 +116,7 @@ int		ft_tab_size(t_tab *tab)
 	char	*str;
 
 	i = 0;
+	str = NULL;
 	get_next_line(0, &str);
 	if (ft_strnequ(&str[5], "fin:", 4))
 		return (0);
@@ -110,7 +126,7 @@ int		ft_tab_size(t_tab *tab)
 	get_next_line(0, &str);
 	free(str);
 	if (!(tab->tab = (char**)malloc(sizeof(char*) * tab->width)))
-		exit(-1);
+		return(0);
 	while (i < tab->width)
 	{
 		get_next_line(0, &str);
@@ -118,5 +134,7 @@ int		ft_tab_size(t_tab *tab)
 		free(str);
 		i++;
 	}
+	get_pos_XO(tab);
+	fill_heat_map(tab);
 	return (1);
 }

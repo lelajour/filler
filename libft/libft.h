@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/04 20:40:03 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/07 17:17:49 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/13 13:50:53 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "../header/ft_printf.h"
 
 typedef struct		s_list
 {
@@ -111,5 +112,12 @@ char				*itoa_basic(unsigned long long value, int base, int x);
 char				*f_toa(long double nb, int preci);
 int					get_next_line(const int fd, char **line);
 int					ft_strclen(char	*str, char c);
+int					ft_strrclen(char *str, char c);
+void				ft_clear_tab(char **tab, int i);
+void				ft_clear_int_tab(int **tab, int i);
+int					ft_strnclen(char *str, char c);
+int					ft_strrnclen(char *str, char c);
+void				ft_ibzero(void *s, size_t n);
+void				*ft_imemset(void *s, int c, size_t n);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/11 13:46:03 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 14:26:50 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/13 12:14:47 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,8 +18,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
-# define BUFF_SIZE 5646
-# define FD_MAX 9999
+# define BUFF_SIZE 2
+# define FD_MAX 1
 
 char	*new_tmp(char *tmp);
 void	line_return(char *tmp, char **line);

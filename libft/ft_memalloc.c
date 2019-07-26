@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/13 17:50:21 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/29 12:31:48 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/13 13:46:20 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,6 @@ void	*ft_memalloc(size_t size)
 
 	tab = (int*)malloc(sizeof(int) * size);
 	if (tab)
-		ft_bzero(tab, size);
+		ft_ibzero(tab, size);
 	return ((void*)tab);
 }
