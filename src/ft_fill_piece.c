@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/09 23:57:40 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/26 05:06:35 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/28 15:30:48 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -92,7 +92,7 @@ int	*get_pos_piece(char *str, int i, char c)
 	tmp[0] = i;
 	tmp[1] = ft_strclen(str, c);
 	tmp[2] = ft_strrclen(str, c);
-	ft_printf("[%d]|[%d][%d]\n", tmp[0], tmp[1], tmp[2]);
+	// ft_printf("[%d]|[%d][%d]\n", tmp[0], tmp[1], tmp[2]);
 	return (tmp);
 }
 

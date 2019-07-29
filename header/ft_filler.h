@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/25 13:20:44 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/26 08:03:37 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/28 19:08:24 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,9 +30,9 @@ typedef struct s_tab
 	int		**map;
 	int		width_en;
 	int		width_my;
-	int		*best_pos;
+	int		best_pos;
 	int		nb;
-	int		
+	int		tmp;
 }							t_tab;
 
 typedef struct s_piece
@@ -47,8 +47,8 @@ typedef struct s_piece
 	int		width_pos;
 }							t_piece;
 
-int			ft_filler();
-int			ft_tab_size(t_tab *tab);
+int			ft_filler(int fd);
+int			ft_tab_size(t_tab *tab, int fd);
 t_piece	*ft_piece_size();
 void		ft_real_psize(char **tab, t_piece *piece);
 void		ft_clear_tab(char **tab, int i);

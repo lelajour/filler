@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/06 19:27:04 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/26 00:29:37 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/28 19:08:56 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ int	*get_pos_tab(char *str, int i, char c)
 	tmp[0] = i;
 	tmp[1] = ft_strnclen(str, c) - 1;
 	tmp[2] = ft_strrnclen(str, c) + 1;
-	ft_printf("j esius la = [%d]|[%d][%d]\nME STR [%s]\n", tmp[0], tmp[1], tmp[2], str);
+	// ft_printf("j esius la = [%d]|[%d][%d]\nME STR [%s]\n", tmp[0], tmp[1], tmp[2], str);
 	return (tmp);
 }
 
@@ -31,7 +31,7 @@ void	get_my_pos(t_tab *tab, int i, char c)
 	int		width;
 	int		tmp;
 
-	ft_printf("je suis my pos = %c\n", c);
+	// ft_printf("je suis my pos = %c\n", c);
 	width = 0;
 	tmp = i;
 	while (i < tab->width)
@@ -91,9 +91,8 @@ void	get_pos_XO(t_tab *tab)
 	tab->pos_en = NULL;
 	tab->my_pos = NULL;
 	tab->map = NULL;
-	tab->best_pos = NULL;
 	c = tab->c == 'O' ? 'x' : 'o';
-	ft_printf("[%c]\n", tab->c);
+	// ft_printf("[%c]\n", tab->c);
 	while (i < tab->width)
 	{
 		if (ft_strchr(tab->tab[i], tab->c) || ft_strchr(tab->tab[i], tab->c + 32))
@@ -110,16 +109,16 @@ void	get_pos_XO(t_tab *tab)
 	}
 }
 
-int		ft_tab_size(t_tab *tab)
+int		ft_tab_size(t_tab *tab, int fd)
 {
 	int		i;
 	char	*str;
 
 	i = 0;
 	str = NULL;
-	get_next_line(0, &str);
-	if (ft_strnequ(&str[5], "fin:", 4))
-		return (0);
+	while (ft_strnequ(str, "Plateau ", 8) == 0)
+		get_next_line(0, &str);
+	dprintf(fd, "%s\n", str);
 	tab->width = ft_atoi(&str[8]);
 	tab->lenght = ft_atoi(&str[11]);
 	free(str);

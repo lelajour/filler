@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/12 22:07:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/25 07:47:10 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/28 20:41:54 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,7 +102,7 @@ void	assign_heat_horizon(int **map, int *tmp, t_tab *tab)
 	ft_assign_en_pos(tmp, i, tab);
 }
 
-void	fill_heat_map(t_tab *tab)
+void	fill_heat_map(t_tab *tab, int fd)
 {
 	int	*tmp;
 	int	i;
@@ -131,7 +131,7 @@ void	fill_heat_map(t_tab *tab)
 		y = 0;
 		ft_printf("[%d]", i);
 		while (y < len)
-			ft_printf("|%03d|", tab->map[i][y++]);
+			dprintf(fd, "|%03d|", tab->map[i][y++]);
 		ft_putchar('\n');
 	}
 }
