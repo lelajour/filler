@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/13 13:44:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/13 13:47:17 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/31 03:38:36 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,10 +16,12 @@
 void	ft_ibzero(void *s, size_t n)
 {
 	int *tmp;
+	int	a;
 
 	tmp = s;
+	a = 0;
 	while (n-- != 0)
 	{
-		*tmp++ = 0;
+		tmp[a++] = 0;
 	}
 }

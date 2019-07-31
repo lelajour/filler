@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/25 13:20:44 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/28 19:08:24 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/31 02:21:38 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,7 +58,7 @@ int			*get_pos_piece(char *str, int i, char c);
 void		get_pos_ox(t_tab *tab, int i);
 void		get_pos_XO(t_tab *tab);
 void		get_pos_tpiece(t_piece *piece);
-void		fill_heat_map(t_tab *tab);
+void		fill_heat_map(t_tab *tab, int fd);
 void		rmap_diagonal_up(int **map, int *tmp, t_tab *tab);
 void		rmap_diagonal_down(int **map, int *tmp, t_tab *tab);
 void		adjust_map(int **map, t_tab *tab);

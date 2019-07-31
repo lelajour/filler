@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/13 13:50:12 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/13 13:50:34 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/31 03:37:09 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,11 @@ void	*ft_imemset(void *s, int c, size_t n)
 
 	tmp = s;
 	a = 0;
-	while (n-- != 0)
-		tmp[a++] = c;
+	while (n != 0)
+	{
+		tmp[a] = c;
+		n--;
+		a++;
+	}
 	return (s);
 }

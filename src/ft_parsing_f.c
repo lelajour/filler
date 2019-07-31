@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/25 12:19:07 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/28 20:18:45 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/31 08:27:03 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,8 +53,6 @@ int		last_ck(int i, t_piece *pce, t_tab *tb)
 		}
 		pce->p_i++;
 	}
-	// if (r_i == 5 && r_j == 9)
-		// ft_printf("{%d}|{%d}\n", tmp, tb->tmp);
 	if (tmp == 1)
 	{
 		tb->nb = tmp;
@@ -141,7 +139,15 @@ int		ft_start(t_tab *tab, int fd)
 		// ft_printf("[%d][%d]|%d\n", i / tab->lenght, i % tab->lenght, score);
 		i++;
 	}
-	dprintf(fd, "%s\n", ft_itoa(tab->best_pos));
+	int y;
+	i = -1;
+	while (++i < tab->width)
+	{
+		y = 0;
+		while (y < tab->lenght)
+			ft_printf("|%02d", tab->map[i][y++]);
+		ft_printf("|\n");
+	}
 	ft_printf("%d %d\n", tab->best_pos / tab->lenght, tab->best_pos % tab->lenght);
 	clear_piece(piece);
 	clear_t_tab(tab);
@@ -151,13 +157,13 @@ int		ft_start(t_tab *tab, int fd)
 int		ft_filler(int fd)
 {
 	int		i;
-	char	first;
 	t_tab *tab;
 	// char	*str;
 
 	i = 1;
 	tab = malloc(sizeof(t_tab) * 2);
-	first = 'O';
+	tab->c = 'O';
+	tab->best_pos = 0;
 	// while (i < 9 && get_next_line(0, &str))
 	// {
 	// 	if (i == 8)
@@ -168,8 +174,7 @@ int		ft_filler(int fd)
 	// 		break;
 	// 	i++;
 	// }
-	tab->c = first;
-	while (i != 0)
+	// while (i != 0)
 		i = ft_start(tab, fd);
 	free(tab);
 	// clear_t_tab(tab);
@@ -183,6 +188,6 @@ int	main(void)
 	c = open("/Users/lelajour/filler/test", O_APPEND | O_RDWR);
 	dprintf(c, "HELLO");
 	if (ft_filler(c) == 1)
-		ft_printf("YES\n");
+		// ft_printf("YES\n");
 	return (0);
 }

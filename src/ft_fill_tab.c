@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/06 19:27:04 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/28 19:08:56 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/31 02:36:11 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -134,6 +134,6 @@ int		ft_tab_size(t_tab *tab, int fd)
 		i++;
 	}
 	get_pos_XO(tab);
-	fill_heat_map(tab);
+	fill_heat_map(tab, fd);
 	return (1);
 }

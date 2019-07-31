@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/12 22:07:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/28 20:41:54 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/31 03:56:53 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,10 +81,10 @@ void	assign_heat_horizon(int **map, int *tmp, t_tab *tab)
 	int	j;
 	int	t;
 
-	heat = 0;
 	i = *tmp;
 	j = *(tmp + 1);
 	t = *(tmp + 2);
+	heat = 1;
 	while (j >= 0)
 	{
 		while (t < tab->lenght)
@@ -108,13 +108,13 @@ void	fill_heat_map(t_tab *tab, int fd)
 	int	i;
 	int	len;
 
+	(void)fd;
 	i = -1;
 	len = tab->lenght;
-	tab->map = (int**)malloc(sizeof(int*) * tab->width);
+	tab->map = (int**)malloc(sizeof(int*) * (tab->width));
 	while (++i < tab->width)
-		tab->map[i] = ft_imemset(ft_memalloc(len), len, len);
+		tab->map[i] = ft_imemset((int*)malloc(sizeof(int) * len), len, len);
 	i = -1;
-	int y;
 	while (++i < tab->width_en)
 	{
 		tmp = tab->pos_en[i];
@@ -126,12 +126,13 @@ void	fill_heat_map(t_tab *tab, int fd)
 	adjust_map(tab->map, tab);
 	// last_verif(tab);
 	i = -1;
-	while (++i < tab->width)
-	{
-		y = 0;
-		ft_printf("[%d]", i);
-		while (y < len)
-			dprintf(fd, "|%03d|", tab->map[i][y++]);
-		ft_putchar('\n');
-	}
+	// int y;
+	// while (++i < tab->width)
+	// {
+	// 	y = 0;
+	// 	dprintf(fd, "[%d]", i);
+	// 	while (y < len)
+	// 		dprintf(fd, "|%03d|", tab->map[i][y++]);
+	// 	dprintf(fd, "\n");
+	// }
 }
