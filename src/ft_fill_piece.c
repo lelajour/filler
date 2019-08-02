@@ -6,84 +6,34 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/09 23:57:40 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/28 15:30:48 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/01 06:45:11 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../header/ft_filler.h"
 
-// void	get_pos_tpiece(t_piece *piece)
-// {
-// 	int		i;
-// 	int		len;
-//
-// 	i = 0;
-// 	len = ft_strlen(piece->tab[i]);
-// 	if (piece)
-// 	{
-// 		piece->top_left = ft_strclen(piece->tab[i], '*');
-// 		piece->top_right = ft_strrclen(piece->tab[i], '*');
-// 		i = piece->width - 1;
-// 		piece->bot_left = ft_strclen(piece->tab[i], '*');
-// 		piece->bot_right = ft_strrclen(piece->tab[i], '*');
-// 	}
-// }
+int		save_pos(int i, int score, t_tab *tab)
+{
+	tab->best_pos = i;
+	return (score);
+}
 
-// char	**ft_adjust_rest(char **tab, int width, t_piece *piece)
-// {
-// 	int		i;
-// 	int		len;
-// 	char	*tmp;
-//
-// 	i = 0;
-// 	len = 2147483647;
-// 	while (i < width)
-// 	{
-// 		if ((tmp = ft_strrchr(tab[i], '*')))
-// 		{
-// 			tmp++;
-// 			len = ft_strlen(tmp) < len ? ft_strlen(tmp) : len;
-// 		}
-// 		i++;
-// 	}
-// 	i = -1;
-// 	while (++i < piece->width)
-// 		ft_memset(tab[i] + (ft_strlen(tab[i]) - len), '\0', len);
-// 	piece->lenght = ft_strlen(tab[0]);
-// 	return (tab);
-// }
-//
-// char	**ft_real_psize(char **f_tab, int p_i, t_piece *piece)
-// {
-// 	int		i;
-// 	int		len;
-// 	int		width;
-// 	char	**tab;
-//
-// 	len = 2147483647;
-// 	i = -1;
-// 	width = 0;
-// 	while (++i < p_i && i >= 0)
-// 	{
-// 		if ((ft_strclen(f_tab[i], '*')) < len)
-// 			len = ft_strclen(f_tab[i], '*');
-// 		if (ft_strrchr(f_tab[i], '*') != 0)
-// 			width++;
-// 	}
-// 	piece->width = width;
-// 	width = 0;
-// 	i = -1;
-// 	tab = malloc(sizeof(char*) * piece->width);
-// 	while (width < piece->width)
-// 	{
-// 		if (ft_strrchr(f_tab[++i], '*') != 0)
-// 			tab[width++] = ft_strdup(f_tab[i] + len);
-// 	}
-// 	return (ft_adjust_rest(tab, piece->width, piece));
-// }
+int		ck_pos(int i, t_piece *pce, t_tab *tb)
+{
+	int	r_j;
+	int	r_i;
 
-int	*get_pos_piece(char *str, int i, char c)
+	r_i = i / tb->lenght;
+	r_j = i % tb->lenght;
+	if (tb->tab[r_i + pce->p_i][r_j + pce->p_j] == tb->c ||
+		tb->tab[r_i + pce->p_i][r_j + pce->p_j] == tb->c + 32)
+		return (1);
+	else
+		return (-1);
+}
+
+int		*get_pos_piece(char *str, int i, char c)
 {
 	int *tmp;
 
@@ -92,7 +42,6 @@ int	*get_pos_piece(char *str, int i, char c)
 	tmp[0] = i;
 	tmp[1] = ft_strclen(str, c);
 	tmp[2] = ft_strrclen(str, c);
-	// ft_printf("[%d]|[%d][%d]\n", tmp[0], tmp[1], tmp[2]);
 	return (tmp);
 }
 
@@ -121,10 +70,10 @@ void	ft_real_psize(char **tab, t_piece *piece)
 	}
 }
 
-t_piece *ft_piece_size()
+t_piece	*ft_piece_size(void)
 {
-	int			i;
-	char		*str;
+	int		i;
+	char	*str;
 	t_piece	*piece;
 
 	i = 0;
@@ -143,6 +92,5 @@ t_piece *ft_piece_size()
 		}
 	}
 	ft_real_psize(piece->tab, piece);
-	// ft_printf("je suis width ->[%d]\nJe suis lenght ->[%d]\n", piece->width, piece->lenght);
 	return (piece);
 }

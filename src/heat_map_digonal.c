@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/15 14:14:10 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/31 06:00:49 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/02 14:54:49 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,26 +48,22 @@ void	lmap_diagonal_down(int **map, int *tmp, t_tab *tab)
 	int	heat;
 	int	a;
 
-	i_up = *tmp;
-	j = *(tmp + 2);
-	a = 1;
-
-	while (j >= *(tmp + 1) && j < tab->lenght)
+	j = *(tmp + 1);
+	a = 0;
+	while (j >= 0 && j < tab->lenght)
 	{
-		heat = 1;
+		heat = 0;
 		i_up = *tmp;
-		while (j < tab->lenght && j > -1)
+		if ((j < tab->lenght && j > -1) && map[i_up][j] == -1)
 		{
-			if (++i_up < tab->width)
+			while (--j < tab->lenght && j > -1)
 			{
-				// ft_printf("[%d][%d]\n", i_up, j);
-				if (map[i_up][j] > heat)
-					map[i_up][j] = heat;
+				if (++i_up < tab->width)
+					if (map[i_up][j] > ++heat)
+						map[i_up][j] = heat;
 			}
-			heat++;
-			j++;
 		}
-		j = (*(tmp + 2)) - a++;
+		j = *(tmp + 1) + ++a;
 	}
 }
 
@@ -78,22 +74,22 @@ void	lmap_diagonal_up(int **map, int *tmp, t_tab *tab)
 	int	heat;
 	int	a;
 
-	i_up = *tmp;
-	j = *(tmp + 2);
-	a = 1;
-	while (j >= *(tmp + 1))
+	j = *(tmp + 1);
+	a = 0;
+	while (j >= 0 && j < tab->lenght)
 	{
-		heat = 1;
+		heat = 0;
 		i_up = *tmp;
-		while (j < tab->lenght && j > -1)
+		if ((j < tab->lenght && j > -1) && map[i_up][j] == -1)
 		{
-			if (--i_up >= 0)
-				if (map[i_up][j] > heat)
-					map[i_up][j] = heat;
-			heat++;
-			j++;
+			while (--j < tab->lenght && j > -1)
+			{
+				if (--i_up >= 0)
+					if (map[i_up][j] > ++heat)
+						map[i_up][j] = heat;
+			}
 		}
-		j = (*(tmp + 2)) - a++;
+		j = *(tmp + 1) + ++a;
 	}
 	lmap_diagonal_down(map, tmp, tab);
 }
@@ -105,33 +101,23 @@ void	rmap_diagonal_down(int **map, int *tmp, t_tab *tab)
 	int	heat;
 	int	a;
 
-	i_up = *tmp;
-	j = *(tmp + 2);
-	a = 1;
-	while (j >= *(tmp + 1) && j < tab->lenght)
+	j = *(tmp + 1);
+	a = 0;
+	while (j >= 0 && j < tab->lenght)
 	{
-		heat = 1;
+		heat = 0;
 		i_up = *tmp;
-		while (j > -1)
+		if ((j > -1) && map[i_up][j] == -1)
 		{
-			if ((++i_up < tab->width && i_up >= 0) && map[i_up][j] > heat)
+			while (++j > -1 && j < tab->lenght)
+			{
+				if ((++i_up < tab->width && i_up >= 0) && map[i_up][j] > ++heat)
 					map[i_up][j] = heat;
-			heat++;
-			j--;
+			}
 		}
-		j = (*(tmp + 2)) - a++;
+		j = *(tmp + 1) + ++a;
 	}
 	lmap_diagonal_up(map, tmp, tab);
-	// int i;
-	// int y;
-	// i = -1;
-	// while (++i < tab->width)
-	// {
-	// 	y = 0;
-	// 	while (y < tab->lenght)
-	// 		ft_printf("|%03d|", tab->map[i][y++]);
-	// 	ft_putchar('\n');
-	// }
 }
 
 void	rmap_diagonal_up(int **map, int *tmp, t_tab *tab)
@@ -141,22 +127,21 @@ void	rmap_diagonal_up(int **map, int *tmp, t_tab *tab)
 	int	heat;
 	int	a;
 
-	(void)tab;
-	i_up = *tmp;
-	j = *(tmp + 2);
-	a = 1;
-	while (j >= *(tmp + 1) && j < tab->lenght)
+	j = *(tmp + 1);
+	a = 0;
+	while (j > -1 && j < tab->lenght)
 	{
-		heat = 1;
+		heat = 0;
 		i_up = *tmp;
-		while (j > -1)
+		if ((j > -1 && j < tab->lenght) && map[i_up][j] == -1)
 		{
-			if ((--i_up >= 0 && i_up < tab->width) && map[i_up][j] > heat)
+			while (++j > -1 && j < tab->lenght)
+			{
+				if ((--i_up >= 0 && i_up < tab->width) && map[i_up][j] > ++heat)
 					map[i_up][j] = heat;
-			heat++;
-			j--;
+			}
 		}
-		j = (*(tmp + 2)) - a++;
+		j = *(tmp + 1) + ++a;
 	}
 	rmap_diagonal_down(map, tmp, tab);
 }

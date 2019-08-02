@@ -6,12 +6,22 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/08 18:39:49 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/31 03:58:26 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/02 07:13:58 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../header/ft_filler.h"
+
+void	scotch_chekpoint(char *str, t_tab *tab)
+{
+	tab->dw = 0;
+	if (ft_strnequ(str, "Plateau 24 40:", 14))
+		tab->dw = 4;
+	else if (ft_strnequ(str, "Plateau 15 17:", 14))
+		tab->dw = 2;
+	free(str);
+}
 
 void	clear_t_tab(t_tab *tab)
 {
@@ -26,10 +36,8 @@ void	clear_t_tab(t_tab *tab)
 			ft_clear_int_tab(tab->pos_en, tab->width_en);
 		if (tab->my_pos != NULL)
 			ft_clear_int_tab(tab->my_pos, tab->width_my);
-		if (tab->map !=  NULL)
+		if (tab->map != NULL)
 			ft_clear_int_tab(tab->map, tab->width);
-		// tab->best_pos = NULL;
-		// free(tab);
 	}
 }
 

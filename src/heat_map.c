@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/12 22:07:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/31 03:56:53 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/02 15:00:28 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,10 +24,13 @@ void	assign_heat_vertikal_down(int **map, int *tmp, t_tab *tab)
 	{
 		i = *tmp;
 		heat = 0;
-		while (++i < tab->width)
+		if (map[i][j] == -1)
 		{
-			if (map[i][j] > heat++ && map[i][j] != -1)
-				map[i][j] = heat;
+			while (++i < tab->width)
+			{
+				if (map[i][j] > heat++ && map[i][j] != -1)
+					map[i][j] = heat;
+			}
 		}
 		j++;
 	}
@@ -35,8 +38,8 @@ void	assign_heat_vertikal_down(int **map, int *tmp, t_tab *tab)
 
 void	ft_assign_en_pos(int *tmp, int i, t_tab *tab)
 {
-	int j;
-	char c;
+	int		j;
+	char	c;
 
 	c = tab->c == 'O' ? 'x' : 'o';
 	j = *(tmp + 1);
@@ -53,25 +56,24 @@ void	assign_heat_vertikal(int **map, int *tmp, t_tab *tab)
 	int	i;
 	int	j;
 
-	(void)tab;
 	i = *tmp;
 	j = *(tmp + 1) + 1;
-	while (j < *(tmp + 2))
+	while (j < *(tmp + 2) && j >= 0)
 	{
-		heat = 0;
-		if (i > 0 && map[i - 1][j] != -1)
+		heat = 1;
+		if (map[i][j] == -1)
 		{
-			while (--i > -1 && map[i][j] != -1)
+			while (--i > -1 && i < tab->width)
 			{
-				if (map[i][j] > heat++)
+				if (map[i][j] > heat && map[i][j] != -1)
 					map[i][j] = heat;
+				heat++;
 			}
 			i = *tmp;
 		}
 		j++;
 	}
 	assign_heat_vertikal_down(map, tmp, tab);
-
 }
 
 void	assign_heat_horizon(int **map, int *tmp, t_tab *tab)
@@ -84,7 +86,7 @@ void	assign_heat_horizon(int **map, int *tmp, t_tab *tab)
 	i = *tmp;
 	j = *(tmp + 1);
 	t = *(tmp + 2);
-	heat = 1;
+	heat = 0;
 	while (j >= 0)
 	{
 		while (t < tab->lenght)
@@ -102,13 +104,12 @@ void	assign_heat_horizon(int **map, int *tmp, t_tab *tab)
 	ft_assign_en_pos(tmp, i, tab);
 }
 
-void	fill_heat_map(t_tab *tab, int fd)
+void	fill_heat_map(t_tab *tab)
 {
 	int	*tmp;
 	int	i;
 	int	len;
 
-	(void)fd;
 	i = -1;
 	len = tab->lenght;
 	tab->map = (int**)malloc(sizeof(int*) * (tab->width));
@@ -121,18 +122,8 @@ void	fill_heat_map(t_tab *tab, int fd)
 		assign_heat_horizon(tab->map, tmp, tab);
 		assign_heat_vertikal(tab->map, tmp, tab);
 		rmap_diagonal_up(tab->map, tmp, tab);
-
 	}
 	adjust_map(tab->map, tab);
-	// last_verif(tab);
-	i = -1;
-	// int y;
-	// while (++i < tab->width)
-	// {
-	// 	y = 0;
-	// 	dprintf(fd, "[%d]", i);
-	// 	while (y < len)
-	// 		dprintf(fd, "|%03d|", tab->map[i][y++]);
-	// 	dprintf(fd, "\n");
-	// }
+	if (tab->dw == 4 || tab->dw == 2)
+		fortytwo(tab->map, tab);
 }

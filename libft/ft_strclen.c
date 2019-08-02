@@ -6,12 +6,12 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/07 13:49:39 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/10 02:10:26 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/01 07:16:41 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-int		ft_strclen(char	*str, char c)
+int	ft_strclen(char *str, char c)
 {
 	int i;
 

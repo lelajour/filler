@@ -6,43 +6,69 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/19 23:03:03 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/20 00:21:52 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/02 15:37:39 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../header/ft_filler.h"
 
-void	scotchisimo(int *y, int *i, int *num)
-{
-	*y = 0;
-	*i = -1;
-	*num = 707;
-}
-
-void		last_verif(t_tab *tab)
+void	sept(int **map, t_tab *t)
 {
 	int	i;
 	int	y;
-	int	num;
-	int	value;
+	int	ret;
+	int	heat;
 
-	y = 0;
-	num = 0;
-	value = 2147483647;
-	while(y < tab->lenght)
+	ret = 0;
+	i = t->pos_en[t->width_en - 1][0];
+	y = t->pos_en[t->width_en - 1][2];
+	while (y < t->lenght && y > -1)
 	{
-		i = 0;
-		while (i < tab->width && tab->map[i][y] != 1)
-		{
-			if (tab->map[i][y] < value)
-				value = tab->map[i][y];
-			if (tab->map[i][y] > value)
-				tab->map[i][y] = value;
-			if ((i == tab->width - 1 && y == 0) && num == 0)
-				scotchisimo(&y, &i, &num);
-			i++;
-		}
-		y++;
+		i = t->pos_en[t->width_en - 1][0];
+		heat = map[i][t->lenght - 1];
+		while ((++i < t->width && i > -1) && (y < t->lenght && y > -1))
+			map[i][y] = ++heat;
+		y = t->pos_en[t->width_en - 1][2] + ++ret;
+	}
+}
+
+void	seize(int **map, t_tab *t)
+{
+	int	i;
+	int	y;
+	int	ret;
+	int	heat;
+
+	ret = 0;
+	i = t->pos_en[t->width_en - 1][0];
+	y = t->pos_en[t->width_en - 1][2];
+	while (y < t->lenght && y > -1)
+	{
+		i = t->pos_en[t->width_en - 1][0];
+		heat = map[i][y] + ret;
+		while ((++i < t->width && i > -1) && (y < t->lenght && y > -1))
+			map[i][y] = ++heat;
+		y = t->pos_en[t->width_en - 1][2] + ++ret;
+	}
+}
+
+void	fortytwo(int **map, t_tab *t)
+{
+	static int a = 100;
+
+	if (a > 16)
+	{
+		if (t->dw == 4)
+			a = 16;
+		else
+			a = 15;
+	}
+	if (a-- > 0 && t->c != 'O')
+	{
+		if (t->dw == 4)
+			seize(map, t);
+		else
+			sept(map, t);
 	}
 }

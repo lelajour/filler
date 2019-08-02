@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/11 21:34:50 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/13 10:30:50 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/01 07:16:54 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ int	ft_strnclen(char *str, char c)
 	i = 0;
 	if (c > 96)
 		c -= 32;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == c || str[i] == c + 32)
 			return (i);
