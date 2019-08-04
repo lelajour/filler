@@ -20,14 +20,15 @@ void	sept(int **map, t_tab *t)
 	int	heat;
 
 	heat = 0;
-	i = 0;
+	i = -1;
 	while (++i < t->width)
 	{
-		y = 0;
+		y = -1;
 		while ((++y < t->lenght))
 		{
+			++heat;
 			if (map[i][y] != -1)
-				map[i][y] = ++heat;
+				map[i][y] = heat;
 		}
 	}
 }
@@ -56,12 +57,12 @@ void	fortytwo(int **map, t_tab *t)
 {
 	static int a = 100;
 
-	if (a > 19)
+	if (a > 99)
 	{
 		if (t->dw == 4)
-			a = 16;
+			a = 20;
 		else
-			a = 19;
+			a = 99;
 	}
 	if (a-- > 0 && t->c != 'O')
 	{
