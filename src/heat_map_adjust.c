@@ -56,12 +56,12 @@ void	fortytwo(int **map, t_tab *t)
 {
 	static int a = 100;
 
-	if (a > 16)
+	if (a > 19)
 	{
 		if (t->dw == 4)
 			a = 16;
 		else
-			a = 17;
+			a = 19;
 	}
 	if (a-- > 0 && t->c != 'O')
 	{
