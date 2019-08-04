@@ -52,7 +52,7 @@ int		verif_pos(t_tab *tb, char **tab, t_piece *pce, int i)
 	r_j = i % tb->lenght;
 	pce->p_i = 0;
 	c = 0;
-	if ((pce->width + r_i) >= tb->width || (pce->lenght + r_j) >= tb->lenght)
+	if ((pce->width + r_i) > tb->width || (pce->lenght + r_j) > tb->lenght)
 		return (-1);
 	while (pce->p_i < pce->width && (pce->p_i + r_i) < tb->width)
 	{
@@ -109,7 +109,7 @@ int		ft_start(t_tab *tab)
 	score = 2147483647;
 	ret = 0;
 	tab->tmp = 0;
-	piece = NULL;
+	tab->best_pos = 0;
 	if (ft_tab_size(tab) == 0 || (piece = ft_piece_size()) == 0)
 		return (0);
 	while (i < (tab->width * tab->lenght))
@@ -135,7 +135,6 @@ int		main(void)
 
 	i = 1;
 	tab = malloc(sizeof(t_tab) * 2);
-	tab->best_pos = 0;
 	get_next_line(0, &str);
 	if (ft_strnequ(str, "$$$ exec p2", 11) == 1)
 		tab->c = 'X';
